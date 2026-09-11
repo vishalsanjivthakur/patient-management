@@ -35,4 +35,4 @@ services:
 networks:
   internal_net:
     driver: bridge
-    internal: true
+    # internal: true  # Commented out to work in local using external dev tools, uncomment during higher env movement
