@@ -137,6 +137,14 @@
 	</dependencies>
 
 	<build>
+    <!-- gRPC extension - Enure OS compatibility for protoc -->
+    <extensions>
+      <extension>
+        <groupId>kr.motd.maven</groupId>
+        <artifactId>os-maven-plugin</artifactId>
+      </extension>
+    </extensions>
+
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
