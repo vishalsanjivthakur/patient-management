@@ -18,7 +18,7 @@ import com.pm.patientservice.repository.PatientRepository;
 @Service
 public class PatientService {
 
-  private PatientRepository patientRepository;
+  private final PatientRepository patientRepository;
   private final BillingServiceGrpcClient billingServiceGrpcClient;
 
   public PatientService(PatientRepository patientRepository, BillingServiceGrpcClient billingServiceGrpcClient) {
