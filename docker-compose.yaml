@@ -14,6 +14,19 @@ services:
     networks:
       - internal_net
 
+  # Billing Application Service
+  billing-service:
+    build:
+      context: ./billing-service/
+      dockerfile: Dockerfile
+    image: billing-service:latest
+    container_name: billing-service
+    ports:
+      - "4001:4001"
+      - "9001:9001"
+    networks:
+      - internal_net
+
   # Patient Application Service
   patient-service:
     build:
@@ -29,21 +42,13 @@ services:
       - SPRING_DATASOURCE_PASSWORD=password
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
       - SPRING_SQL_INIT_MODE=always
+      - BILLING_SERVICE_ADDRESS=billing-service
+      - BILLING_SERVICE_GRPC_PORT=9001
     networks:
       - internal_net
-
-  # Billing Application Service
-  billing-service:
-    build:
-      context: ./billing-service/
-      dockerfile: Dockerfile
-    image: billing-service:latest
-    container_name: billing-service
-    ports:
-      - "4001:4001"
-      - "9001:9001"
-    networks:
-      - internal_net
+    depends_on:
+      - patient-service-db
+      - billing-service
 
 networks:
   internal_net:
