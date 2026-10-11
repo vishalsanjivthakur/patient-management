@@ -73,6 +73,23 @@ services:
       - kafka
       - billing-service
 
+  # Analytics Application Service
+  analytics-service:
+    build:
+      context: ./analytics-service
+      dockerfile: Dockerfile
+    image: analytics-service:latest
+    container_name: analyics-service
+    ports:
+      - "4002:4002"
+    environment:
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+    networks:
+      - internal_net
+    depends_on:
+      - kafka
+
+
 networks:
   internal_net:
     driver: bridge
